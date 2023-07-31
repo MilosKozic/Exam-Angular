@@ -1,29 +1,28 @@
 <h2 class="title">Sign Up</h2>
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <app-input [control]="usernameControl" [placeholder]="'Username'" [type]="'text'"></app-input>
+    <app-input class="input" [control]="usernameControl" [placeholder]="'Username'" [type]="'text'"></app-input>
     <div *ngIf="usernameControl.invalid && (usernameControl.dirty || usernameControl.touched)">
-      <div *ngIf="usernameControl.errors?.['required']">Username is required</div>
+      <div class="error-message" *ngIf="usernameControl.errors?.['required']">Username is required</div>
     </div>
 
-    <app-input [control]="emailControl" [placeholder]="'Email'" [type]="'text'"></app-input>
+    <app-input class="input" [control]="emailControl" [placeholder]="'Email'" [type]="'text'"></app-input>
     <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)">
-      <div *ngIf="emailControl.errors?.['email']">Invalid email</div>
-      <div *ngIf="emailControl.errors?.['required']">Email is required</div>
+      <div class="error-message" *ngIf="emailControl.errors?.['email']">Invalid email</div>
+      <div class="error-message" *ngIf="emailControl.errors?.['required']">Email is required</div>
     </div>
 
-    <app-input [control]="passwordControl" [placeholder]="'Password'" [type]="'password'"></app-input>
+    <app-input class="input" [control]="passwordControl" [placeholder]="'Password'" [type]="'password'"></app-input>
     <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
-      <div *ngIf="passwordControl.errors?.['required']">Password is required</div>
-      <div *ngIf="passwordControl.errors?.['minlength']">Password must be at least 10 characters long</div>
+      <div class="error-message" *ngIf="passwordControl.errors?.['required']">Password is required</div>
+      <div class="error-message" *ngIf="passwordControl.errors?.['minlength']">Password must be at least 10 characters long</div>
     </div>
 
-    <app-input [control]="confirmPasswordControl" [placeholder]="'Confirm password'" [type]="'password'"></app-input>
+    <app-input class="input" [control]="confirmPasswordControl" [placeholder]="'Confirm password'" [type]="'password'"></app-input>
     <div *ngIf="confirmPasswordControl.invalid && (confirmPasswordControl.dirty || confirmPasswordControl.touched)">
-      <div *ngIf="confirmPasswordControl.errors?.['required']">Confirm Password is required</div>
+      <div class="error-message" *ngIf="confirmPasswordControl.errors?.['required']">Confirm Password is required</div>
     </div>
-    <div *ngIf="confirmPasswordControl.valid && registerForm.errors?.['passwordMismatch']">Passwords do not match</div>
+    <div class="error-message" *ngIf="confirmPasswordControl.valid && registerForm.errors?.['passwordMismatch']">Passwords do not match</div>
 
-
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
-    <button (click)="goToLogin()" type="button">Go to Sign In</button>
+    <app-button class="button" [label]="'Register'" [style]="'primary'" [type]="'submit'" [isDisabled]="registerForm.invalid"></app-button>
+    <app-button class="button" [label]="'Go to Sign In'" [style]="'primary'" [type]="'button'" (onClick)="goToLogin()"></app-button>
   </form>

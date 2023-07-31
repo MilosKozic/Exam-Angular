@@ -3,12 +3,14 @@
     align-items: center;
     padding-left: 20%;
     height: 100vh;
-    background-image: url('../../assets/background-cover-free.jpg');
+    background-image: url('../../assets/super-admin.webp');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .content {
-    background-color: rgb(255 255 255 / 20%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     width: 450px;
     padding: 20px;
     border-radius: 8px;
