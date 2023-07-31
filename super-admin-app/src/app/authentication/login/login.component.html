@@ -1,0 +1,32 @@
+    
+    <h2 class="title">Sign In</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+       <app-input class="input" [control]="emailControl" [placeholder]="'Email'" [type]="'text'"></app-input>
+      <!-- <input
+        type="text"
+        [formControl]="emailControl"
+        placeholder="Email"
+      /> -->
+      <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)">
+        <div *ngIf="emailControl.errors?.['email']">Invalid email</div>
+      </div>
+
+      <app-input class="input" [control]="passwordControl" [placeholder]="'Password'" [type]="'password'"></app-input>
+      <!-- <input
+        type="password"
+        [formControl]="passwordControl"
+        placeholder="Password"
+      /> -->
+      <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+        <div *ngIf="passwordControl.errors?.['minlength']">Password must be at least 10 characters long</div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      <button type="button" (click)="goToRegister()">Go to Sign Up</button>
+
+    </form>
+
+
+
