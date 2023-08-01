@@ -27,7 +27,9 @@ export class MainGuard {
     }
   }
 }
-  export const isMainGuard: CanActivateFn =(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any =>{
-    return inject(MainGuard).canActivate(route, state)
-  }
-
+export const isMainGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): any => {
+  return inject(MainGuard).canActivate(route, state);
+};

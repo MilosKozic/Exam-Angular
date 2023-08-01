@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
   Router,
+  CanActivateFn,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../authentication/auth.service';
@@ -12,7 +13,7 @@ import { AuthService } from '../authentication/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -27,3 +28,8 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+
+export const isAuthGuard: CanActivateFn =(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any =>{
+  return inject(AuthGuard).canActivate(route, state)
+}
+
