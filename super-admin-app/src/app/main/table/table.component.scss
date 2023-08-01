@@ -6,7 +6,7 @@
     th,
     td {
         border: 1px solid #ccc;
-        padding: 8px;
+        padding: 6px;
         text-align: left;
         word-wrap: break-word;
     }
@@ -26,6 +26,16 @@
     }
 }
 
-button {
-    margin-right: 8px;
+.action-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    app-button {
+        margin-right: 8px;
+    }
+}
+
+.delete-multi-btn {
+    width: 200px;
+    margin-bottom: 20px;
 }

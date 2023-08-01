@@ -1,5 +1,7 @@
-<app-button *ngIf="(selItems | async)?.length && actions" [label]="'Delete selected data'" [style]="'danger'"
-  (onClick)="onDeleteMulti(selItems.value)"></app-button>
+<div class="delete-multi-btn">
+    <app-button *ngIf="(selItems | async)?.length && actions" [label]="'Delete selected data'" [style]="'danger'"
+    (onClick)="onDeleteMulti(selItems.value)"></app-button>
+</div>
 
 <table class="custom-table">
   <!-- Table header -->
@@ -35,8 +37,8 @@
     <td class="cell" (click)="toggleSelection(item.id)">{{ item.formName }}</td>
     <td class="cell" (click)="toggleSelection(item.id)">{{ item.formStatus }}</td>
 
-    <td class="cell" *ngIf="!(selItems | async)?.length && actions">
-      <app-button [label]="'View'" [style]="'success'" (onClick)="onView(item.id)"></app-button>
+    <td class="cell action-cell" *ngIf="!(selItems | async)?.length && actions">
+      <app-button [label]="'View'" [style]="'secondary'" (onClick)="onView(item.id)"></app-button>
       <app-button [label]="'Delete'" [style]="'danger'" (onClick)="onDelete(item.id)"></app-button>
     </td>
   </tr>
