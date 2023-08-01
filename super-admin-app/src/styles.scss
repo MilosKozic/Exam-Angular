@@ -19,3 +19,18 @@ ul {
 ul {
     list-style-type: none;
 }
+
+:root {
+  --primary-color: #007bff; 
+  --background-color: #ffffff;
+  --secondary-color:#dddd;
+  --font-color: #333333;
+}
+
+/* Dark theme */
+.dark-theme {
+  --primary-color: #ff6b6b; 
+  --background-color: #333333;
+  --secondary-color:#e65858;
+  --font-color:#fff; 
+}

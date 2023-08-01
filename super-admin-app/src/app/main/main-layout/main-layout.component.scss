@@ -2,4 +2,12 @@
     height: calc(100vh - 56px);
     padding: 16px;
     overflow-y: auto; 
+    background-color: var(--background-color);
+}
+button {
+    border-radius:8px;
+    border: 1px solid #dddd;
+    cursor: pointer;
+    margin-left: 12px;
+    background-color: var(--secondary-color);
 }
