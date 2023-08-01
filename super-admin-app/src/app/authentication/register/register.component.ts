@@ -58,7 +58,10 @@ export class RegisterComponent {
         //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
         // which would further require some additional components
       }, (error: any) => {
-        console.log(error);
+        const errorMessage = error.error.error.message;
+        this.toastr.error(errorMessage)
+        // error messages and the form in which they come would be configure with BE devs, and we can catch them in the interceptor
+        // and then we can put all error logic in toast directly from interceptore ( quick solution )
       })
     }
   }

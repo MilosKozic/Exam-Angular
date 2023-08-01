@@ -42,7 +42,6 @@ export class LoginComponent {
         this.toastr.success('You are successfully logged in')
       }, (error: any) => {
         this.toastr.error('Invalid credentials!')
-        console.log(error);
       })
     }
   }
