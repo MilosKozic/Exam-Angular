@@ -5,6 +5,9 @@ import { MainRoutingModule } from './main-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main.component';
+import { TableComponent } from './table/table.component';
+import { CommonModule } from '@angular/common';
+import { ConfirmModule } from '../shared/confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [
@@ -12,8 +15,9 @@ import { MainComponent } from './main.component';
     NavbarComponent,
     MainLayoutComponent,
     MainComponent,
+    TableComponent,
   ],
-  imports: [MainRoutingModule, ButtonModule],
+  imports: [CommonModule, MainRoutingModule, ButtonModule, ConfirmModule],
   exports: [],
 })
 export class MainModule {}

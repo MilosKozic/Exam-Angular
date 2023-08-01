@@ -1,0 +1,10 @@
+<div class="overlay">
+  <div class="modal">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+    <div class="buttons">
+      <button (click)="onConfirmClick(true)">{{ confirmLabel }}</button>
+      <button (click)="onConfirmClick(false)">{{ cancelLabel }}</button>
+    </div>
+  </div>
+</div>
