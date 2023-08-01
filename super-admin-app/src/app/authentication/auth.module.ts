@@ -9,7 +9,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { InputModule } from '../shared/input/input.module';
 import { ButtonModule } from '../shared/button/button.module';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import {  HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -24,7 +23,7 @@ import {  HttpClientModule } from '@angular/common/http';
         ReactiveFormsModule,
         AuthRoutingModule,
         InputModule,
-        ButtonModule,
+        ButtonModule
         ],
     providers: []
 })

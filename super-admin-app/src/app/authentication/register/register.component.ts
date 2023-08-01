@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,8 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {
     this.usernameControl = this.formBuilder.control('', [Validators.required]);
     this.emailControl = this.formBuilder.control('', [Validators.required, Validators.email]);
@@ -50,9 +51,12 @@ export class RegisterComponent {
       const password = this.registerForm.value.password;
 
       this.authService.register(email, password).subscribe((data: any) => {
-        console.log(data)
         this.router.navigate(['/home']);
         localStorage.setItem('currentUser', JSON.stringify(data.idToken));
+        this.toastr.success('You are successfully logged in')
+
+        //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
+        // which would further require some additional components
       }, (error: any) => {
         console.log(error);
       })

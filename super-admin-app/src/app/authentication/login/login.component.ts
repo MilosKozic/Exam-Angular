@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
+    private toastr: ToastrService
   ) {
     this.emailControl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.passwordControl = this.formBuilder.control('', [Validators.required, Validators.minLength(10)]);
@@ -36,7 +39,9 @@ export class LoginComponent {
         console.log(data)
         this.router.navigate(['/home']);
         localStorage.setItem('currentUser', JSON.stringify(data.idToken));
+        this.toastr.success('You are successfully logged in')
       }, (error: any) => {
+        this.toastr.error('Invalid credentials!')
         console.log(error);
       })
     }
