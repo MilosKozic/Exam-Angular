@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { MainGuard } from './guards/main.,guard';
+import { MainGuard, isMainGuard } from './guards/main.,guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [MainGuard],
+    canActivate: [isMainGuard],
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
   },
   { path: '**', redirectTo: 'auth/login' },
