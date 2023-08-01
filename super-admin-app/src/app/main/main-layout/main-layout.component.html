@@ -1,5 +1,5 @@
 <app-navbar>
-    <app-button [label]="'logout'" [style]="'secondary'" ></app-button>
+    <app-button [label]="'logout'" [style]="'secondary'" (onClick)="logout()"></app-button>
 </app-navbar>
 <div class="content">
     <ng-content></ng-content>

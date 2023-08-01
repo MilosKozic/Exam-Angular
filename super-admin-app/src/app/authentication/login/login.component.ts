@@ -38,7 +38,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe((data: any) => {
         console.log(data)
         this.router.navigate(['/home']);
-        localStorage.setItem('currentUser', JSON.stringify(data.idToken));
+        localStorage.setItem('token', JSON.stringify(data.idToken));
         this.toastr.success('You are successfully logged in')
       }, (error: any) => {
         this.toastr.error('Invalid credentials!')

@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
-  register(email: any, password: any): any {
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  register(email: string, password: string): Observable<Object> {
     return this.httpClient
     .post(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDMQMYwxBu8_TBRkZ71NImuhf3jJPMwjcw',
@@ -19,7 +25,7 @@ export class AuthService {
     )
   }
 
-  login(email: any, password: any): any {
+  login(email: string, password: string): Observable<Object> {
     return this.httpClient
     .post(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMQMYwxBu8_TBRkZ71NImuhf3jJPMwjcw',
@@ -32,12 +38,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
-  }
-
-  getCurrentUser(): any {
-    // Get the current user data from local storage
-    const userString = localStorage.getItem('currentUser');
-    return userString ? JSON.parse(userString) : null;
+    localStorage.removeItem('token');
+    this.router.navigate(['/auth/login'])
   }
 }
