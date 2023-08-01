@@ -1,43 +1,44 @@
-<app-button *ngIf="(selItems | async)?.length" [label]="'Delete selected data'" [style]="'danger'"
+<app-button *ngIf="(selItems | async)?.length && actions" [label]="'Delete selected data'" [style]="'danger'"
   (onClick)="onDeleteMulti(selItems.value)"></app-button>
 
 <table class="custom-table">
   <!-- Table header -->
   <tr class="header-row">
-    <th class="header-cell">
+    <th class="header-cell checkbox-cell" *ngIf="actions">
       <div class="checkbox">
         <input type="checkbox" (change)="toggleAllSelection()" [checked]="isAllSelected()" />
         <div class="checkbox-custom"></div>
       </div>
     </th>
+    <th class="header-cell">id</th>
     <th class="header-cell">Name</th>
-    <th class="header-cell">Age</th>
     <th class="header-cell">Email</th>
-    <th class="header-cell" *ngIf="!(selItems | async)?.length">Actions</th>
+    <th class="header-cell">Phone</th>
+    <th class="header-cell">Form name</th>
+    <th class="header-cell">Form status</th>
+    <th class="header-cell" *ngIf="!(selItems | async)?.length && actions">Actions</th>
   </tr>
 
   <!-- Table rows -->
   <tr class="data-row" *ngFor="let item of dataSource" [class.selected]="isItemSelected(item.id)">
-    <td class="cell" (click)="toggleSelection(item.id)">
+    <td *ngIf="actions" class="cell checkbox-cell" (click)="toggleSelection(item.id)">
       <div class="checkbox">
         <input type="checkbox" (click)="$event.stopPropagation()" [checked]="isItemSelected(item.id)"
           (change)="toggleSelection(item.id)" />
         <div class="checkbox-custom"></div>
       </div>
     </td>
+    <td class="cell" (click)="toggleSelection(item.id)">{{ item.id }}</td>
     <td class="cell" (click)="toggleSelection(item.id)">{{ item.name }}</td>
-    <td class="cell" (click)="toggleSelection(item.id)">{{ item.age }}</td>
     <td class="cell" (click)="toggleSelection(item.id)">{{ item.email }}</td>
-    <td class="cell" *ngIf="!(selItems | async)?.length">
+    <td class="cell" (click)="toggleSelection(item.id)">{{ item.phone }}</td>
+    <td class="cell" (click)="toggleSelection(item.id)">{{ item.formName }}</td>
+    <td class="cell" (click)="toggleSelection(item.id)">{{ item.formStatus }}</td>
+
+    <td class="cell" *ngIf="!(selItems | async)?.length && actions">
       <app-button [label]="'View'" [style]="'success'" (onClick)="onView(item.id)"></app-button>
       <app-button [label]="'Delete'" [style]="'danger'" (onClick)="onDelete(item.id)"></app-button>
     </td>
   </tr>
 </table>
 
-<app-confirm-modal 
-  (confirm)="onConfirm($event)" 
-  [cancelLabel]="'No'"
-  [confirmLabel]="'Yes'"
-  [message]="'Are you sure you want to delete data?'" 
-  *ngIf="isConfirmDialogOpen"></app-confirm-modal>

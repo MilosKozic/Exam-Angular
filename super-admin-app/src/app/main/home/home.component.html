@@ -1,1 +1,12 @@
-<app-table [dataSource]="data"></app-table>
+<app-table 
+  [dataSource]="homeService.itemsData$ | async" 
+  [actions]="true"
+  (deleteAction)="homeService.handleDeleteClick($event)"
+  (viewAction)="homeService.handleViewClick($event)"></app-table>
+
+  <app-confirm-modal 
+  (confirm)="onConfirm($event)" 
+  [cancelLabel]="'No'"
+  [confirmLabel]="'Yes'"
+  [message]="'Are you sure you want to delete data?'" 
+  *ngIf="homeService.isConfirmModalOpen | async"></app-confirm-modal>

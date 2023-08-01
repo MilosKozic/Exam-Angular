@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface TableItem {
   id: number;
   name: string;
-  age: number;
   email: string;
+  phone: number;
+  formName: string;
+  formStatus: string;
 }
 
 @Component({
@@ -14,11 +16,12 @@ export interface TableItem {
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
-  @Input() dataSource: TableItem[] = [];
+  @Input() dataSource: TableItem[] | any= [];
+  @Input() actions!: boolean;
+  @Output() viewAction = new EventEmitter<number>();
+  @Output() deleteAction = new EventEmitter<number[]>();
   selItems = new BehaviorSubject<number[]>([])
   selectedItems: number[] = [];
-  isConfirmDialogOpen = false;
-  itemsForDelete: any;
 
   toggleSelection(id: number) {
     const index = this.selectedItems.indexOf(id);
@@ -44,31 +47,21 @@ export class TableComponent {
       this.selectedItems = [];
       this.selItems.next([...this.selectedItems])
     } else {
-      this.selectedItems = this.dataSource.map((item) => item.id);
+      this.selectedItems = this.dataSource.map((item: any) => item.id);
       this.selItems.next([...this.selectedItems])
     }
   }
 
   onView(id: number) {
-    console.log('View item with ID:', id);
+    this.viewAction.emit(id)
   }
 
   onDelete(id: number) {
-    this.isConfirmDialogOpen = true;
-    this.itemsForDelete = [id]
+    this.deleteAction.emit([id])
   }
 
-  onDeleteMulti(data: any) {
-    this.isConfirmDialogOpen = true;    
-    this.itemsForDelete = data;
+  onDeleteMulti(data: number[]) {
+    this.deleteAction.emit(data)
   }
 
-  onConfirm(event:boolean) {
-     if(event) {      
-      this.dataSource = this.dataSource.filter((item) => !this.itemsForDelete?.includes(item.id));
-      console.log(this.dataSource,'data');
-      
-     }
-     this.isConfirmDialogOpen = false;  
-  }
 }

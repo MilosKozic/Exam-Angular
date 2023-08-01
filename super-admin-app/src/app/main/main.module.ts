@@ -8,6 +8,7 @@ import { MainComponent } from './main.component';
 import { TableComponent } from './table/table.component';
 import { CommonModule } from '@angular/common';
 import { ConfirmModule } from '../shared/confirm-modal/confirm-modal.module';
+import { FormDetailsComponent } from './form-details/form-details.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ConfirmModule } from '../shared/confirm-modal/confirm-modal.module';
     MainLayoutComponent,
     MainComponent,
     TableComponent,
+    FormDetailsComponent,
   ],
   imports: [CommonModule, MainRoutingModule, ButtonModule, ConfirmModule],
   exports: [],

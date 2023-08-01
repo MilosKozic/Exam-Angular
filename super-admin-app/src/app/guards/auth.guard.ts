@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
@@ -23,7 +22,7 @@ export class AuthGuard {
     if (!this.authService.isAuthenticated()) {
       return true;
     } else {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/form']);
       return false;
     }
   }
