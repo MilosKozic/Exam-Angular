@@ -14,7 +14,7 @@ export class LoginComponent {
   passwordControl: FormControl;
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
   ) {
@@ -29,19 +29,16 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      // Handle login logic here
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
 
-      // Simulate authentication by calling the fake authentication service
-      const isLoggedIn = this.authService.login(email, password);
-
-      if (isLoggedIn) {
-        // Redirect to the home page after successful login
+      this.authService.login(email, password).subscribe((data: any) => {
+        console.log(data)
         this.router.navigate(['/home']);
-      } else {
-        // Handle authentication error (display error message, etc.)
-      }
+        localStorage.setItem('currentUser', JSON.stringify(data.idToken));
+      }, (error: any) => {
+        console.log(error);
+      })
     }
   }
 

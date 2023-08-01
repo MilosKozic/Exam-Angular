@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -15,7 +16,11 @@ export class RegisterComponent {
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.usernameControl = this.formBuilder.control('', [Validators.required]);
     this.emailControl = this.formBuilder.control('', [Validators.required, Validators.email]);
     this.passwordControl = this.formBuilder.control('', [Validators.required, Validators.minLength(10)]);
@@ -41,9 +46,17 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      // Handle registration logic here
+      const email = this.registerForm.value.email;
+      const password = this.registerForm.value.password;
+
+      this.authService.register(email, password).subscribe((data: any) => {
+        console.log(data)
+        this.router.navigate(['/home']);
+        localStorage.setItem('currentUser', JSON.stringify(data.idToken));
+      }, (error: any) => {
+        console.log(error);
+      })
     }
-    console.log(this.passwordControl, this.confirmPasswordControl, this.registerForm.errors?.['passwordMismatch'])
   }
 
   goToLogin() {

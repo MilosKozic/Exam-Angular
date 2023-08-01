@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  login(email: string, password: string): boolean {
-    // Simulate authentication logic (replace this with your actual authentication logic)
-    // if (email === 'user@example.com' && password === 'password') {
-    //   // Fake user data for demonstration purposes (replace with actual user data)
-      const user = {
-        email: email,
-      };
+  register(email: any, password: any): any {
+    return this.httpClient
+    .post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDMQMYwxBu8_TBRkZ71NImuhf3jJPMwjcw',
+        {
+            email: email, 
+            password: password,
+            returnSecureToken: true
+        }
+    )
+  }
 
-      // Store user data in local storage
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return true;
-    // }
-
-    // return false;
+  login(email: any, password: any): any {
+    return this.httpClient
+    .post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDMQMYwxBu8_TBRkZ71NImuhf3jJPMwjcw',
+        {
+            email: email, 
+            password: password,
+            returnSecureToken: true
+        }
+    )
   }
 
   logout(): void {
-    // Remove user data from local storage on logout
     localStorage.removeItem('currentUser');
   }
 
