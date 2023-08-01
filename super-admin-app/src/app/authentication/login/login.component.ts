@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -21,8 +25,14 @@ export class LoginComponent {
     private authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.emailControl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.passwordControl = this.formBuilder.control('', [Validators.required, Validators.minLength(10)]);
+    this.emailControl = this.formBuilder.control('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.passwordControl = this.formBuilder.control('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]);
 
     this.loginForm = this.formBuilder.group({
       email: this.emailControl,
@@ -35,19 +45,21 @@ export class LoginComponent {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
 
-      this.authService.login(email, password).subscribe((data: any) => {
-        console.log(data)
-        this.router.navigate(['/home']);
-        localStorage.setItem('token', JSON.stringify(data.idToken));
-        this.toastr.success('You are successfully logged in')
-      }, (error: any) => {
-        this.toastr.error('Invalid credentials!')
-      })
+      this.authService.login(email, password).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.router.navigate(['/home']);
+          localStorage.setItem('token', JSON.stringify(data.idToken));
+          this.toastr.success('You are successfully logged in');
+        },
+        (error: any) => {
+          this.toastr.error('Invalid credentials!');
+        }
+      );
     }
   }
 
   goToRegister() {
     this.router.navigate(['/auth/register']);
   }
-
 }

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -23,9 +28,17 @@ export class RegisterComponent {
     private toastr: ToastrService
   ) {
     this.usernameControl = this.formBuilder.control('', [Validators.required]);
-    this.emailControl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.passwordControl = this.formBuilder.control('', [Validators.required, Validators.minLength(10)]);
-    this.confirmPasswordControl = this.formBuilder.control('', [Validators.required]);
+    this.emailControl = this.formBuilder.control('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.passwordControl = this.formBuilder.control('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]);
+    this.confirmPasswordControl = this.formBuilder.control('', [
+      Validators.required,
+    ]);
 
     this.registerForm = this.formBuilder.group(
       {
@@ -50,19 +63,22 @@ export class RegisterComponent {
       const email = this.registerForm.value.email;
       const password = this.registerForm.value.password;
 
-      this.authService.register(email, password).subscribe((data: any) => {
-        this.router.navigate(['/home']);
-        localStorage.setItem('token', JSON.stringify(data.idToken));
-        this.toastr.success('You are successfully logged in')
+      this.authService.register(email, password).subscribe(
+        (data: any) => {
+          this.router.navigate(['/home']);
+          localStorage.setItem('token', JSON.stringify(data.idToken));
+          this.toastr.success('You are successfully logged in');
 
-        //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
-        // which would further require some additional components
-      }, (error: any) => {
-        const errorMessage = error.error.error.message;
-        this.toastr.error(errorMessage)
-        // error messages and the form in which they come would be configure with BE devs, and we can catch them in the interceptor
-        // and then we can put all error logic in toast directly from interceptore ( quick solution )
-      })
+          //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
+          // which would further require some additional components
+        },
+        (error: any) => {
+          const errorMessage = error.error.error.message;
+          this.toastr.error(errorMessage);
+          // error messages and the form in which they come would be configure with BE devs, and we can catch them in the interceptor
+          // and then we can put all error logic in toast directly from interceptore ( quick solution )
+        }
+      );
     }
   }
 

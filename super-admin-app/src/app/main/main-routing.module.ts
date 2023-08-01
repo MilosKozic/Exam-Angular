@@ -5,14 +5,15 @@ import { MainComponent } from './main.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainComponent,
-    children: []
+    path: '',
+    component: MainComponent,
+    children: [],
   },
   { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

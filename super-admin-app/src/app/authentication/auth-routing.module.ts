@@ -7,24 +7,28 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 
 const routes: Routes = [
   {
-    path: '', component: AuthLayoutComponent,
+    path: '',
+    component: AuthLayoutComponent,
     children: [
       {
-        path: 'login', component: LoginComponent
+        path: 'login',
+        component: LoginComponent,
       },
       {
-        path: 'register', component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent,
       },
       {
-        path: 'reset-password', component: ForgotPasswordComponent
+        path: 'reset-password',
+        component: ForgotPasswordComponent,
       },
-    ]
+    ],
   },
   { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

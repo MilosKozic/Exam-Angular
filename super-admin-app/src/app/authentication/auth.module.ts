@@ -11,20 +11,20 @@ import { ButtonModule } from '../shared/button/button.module';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-    declarations: [
-        LoginComponent,
-        RegisterComponent,
-        AuthLayoutComponent,
-        ForgotPasswordComponent
-    ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        AuthRoutingModule,
-        InputModule,
-        ButtonModule
-        ],
-    providers: []
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AuthLayoutComponent,
+    ForgotPasswordComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    AuthRoutingModule,
+    InputModule,
+    ButtonModule,
+  ],
+  providers: [],
 })
-export class AuthModule { }
+export class AuthModule {}
