@@ -51,9 +51,6 @@ export class LoginComponent {
           this.router.navigate(['/home']);
           localStorage.setItem('token', JSON.stringify(data.idToken));
           this.toastr.success('You are successfully logged in');
-        },
-        (error: any) => {
-          this.toastr.error('Invalid credentials!');
         }
       );
     }

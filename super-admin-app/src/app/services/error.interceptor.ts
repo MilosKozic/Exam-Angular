@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
 
-    constructor() {}
+    constructor(private toastr: ToastrService) {}
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -16,18 +17,11 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
                     return res
                 }),
                 catchError((error: HttpErrorResponse) => {
-                    let errorMsg = '';
-                    
-                    if (error.error instanceof ErrorEvent) {
-                        errorMsg = `Error: ${error.error.error.message}`;
-                        console.log(errorMsg);
-                        
-                    } else {
-                        errorMsg = `Error Code: ${error.status},  Message: ${error.error.error.message}`;
-                        console.log(errorMsg);
-                    }
-                    console.log(errorMsg,'error');
-                    return throwError(errorMsg);
+                    //at this moment, toastr throws an error that automatically arrives from the server, 
+                    //the format and text of the error would not look like this, 
+                    //but would be defined in agreement with BE engineers
+                    this.toastr.error(error.message)
+                    return throwError(error);
                 })
             )
     }

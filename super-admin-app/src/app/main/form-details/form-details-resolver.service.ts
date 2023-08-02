@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from 'src/app/services/http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormDetailsResolverService {
   itemData = new BehaviorSubject<any>([]);
-  itemData$ = this.itemData.asObservable()
-  private apiUrl = 'https://64c94d56b2980cec85c21f8c.mockapi.io/admin'; // Replace with your API endpoint URL
+  itemData$ = this.itemData.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpService: HttpService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> | Promise<any> | any {
     const id = route.paramMap.get('id');
-    this.getOneItem(id).subscribe((data) => {
-      this.itemData.next([data]);
-    });
+    this.getOneItem(id);
   }
 
-  getOneItem(id: any): Observable<any> {
-    return this.http.get<any>(this.apiUrl + '/' + id);
+  getOneItem(id: any) {
+    this.httpService.getSingle(id).subscribe((data) => {
+      this.itemData.next([data]);
+    });
   }
 }
