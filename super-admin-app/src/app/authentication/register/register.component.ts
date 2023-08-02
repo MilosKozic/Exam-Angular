@@ -63,14 +63,13 @@ export class RegisterComponent {
       const email = this.registerForm.value.email;
       const password = this.registerForm.value.password;
 
-      this.authService.register(email, password).subscribe(
-        (data: any) => {
-          this.router.navigate(['/home/form']);
-          localStorage.setItem('token', JSON.stringify(data.idToken));
-          this.toastr.success('You are successfully logged in');
-          //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
-          // which would further require some additional components
-        });
+      this.authService.register(email, password).subscribe((data: any) => {
+        this.router.navigate(['/home/form']);
+        localStorage.setItem('token', JSON.stringify(data.idToken));
+        this.toastr.success('You are successfully logged in');
+        //this is simplified, the real logic would require sending a link to the user's email from where he can activate his account,
+        // which would further require some additional components
+      });
     }
   }
 

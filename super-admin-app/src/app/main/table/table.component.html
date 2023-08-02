@@ -1,6 +1,6 @@
 <div class="delete-multi-btn">
-    <app-button *ngIf="(selItems | async)?.length && actions" [label]="'Delete selected data'" [style]="'danger'"
-    (onClick)="onDeleteMulti(selItems.value)"></app-button>
+    <app-button *ngIf="(selected$Items | async)?.length && actions" [label]="'Delete selected data'" [style]="'danger'"
+    (onClick)="onDeleteMulti(selected$Items.value)"></app-button>
 </div>
 
 <table class="custom-table">
@@ -15,7 +15,7 @@
       </div>
     </th>
     <ng-content></ng-content>
-    <th class="header-cell action-cell" *ngIf="!(selItems | async)?.length && actions">Actions</th>
+    <th class="header-cell action-cell" *ngIf="!(selected$Items | async)?.length && actions">Actions</th>
   </tr>
 
   <!-- Table rows -->
@@ -31,7 +31,7 @@
       <td>{{ singleItem.value }}</td>
     </ng-container>
 
-    <td class="cell action-cell" *ngIf="!(selItems | async)?.length && actions">
+    <td class="cell action-cell" *ngIf="!(selected$Items | async)?.length && actions">
       <div class="action-buttons">
         <app-button [label]="'View'" [style]="'secondary'" (onClick)="onView(item.id)"></app-button>
         <app-button [label]="'Delete'" [style]="'danger'" (onClick)="onDelete(item.id)"></app-button>

@@ -10,10 +10,13 @@
   <th class="header-cell">Email</th>
   <th class="header-cell">Phone</th>
   <th class="header-cell">Form name</th>
-  <th class="header-cell">Form status</th></app-table>
+  <th class="header-cell">Form status</th>
+</app-table>
+
 <app-confirm-modal 
   (confirm)="onConfirm($event)" 
   [cancelLabel]="'No'"
   [confirmLabel]="'Yes'"
   [message]="'Are you sure you want to delete data?'" 
-  *ngIf="homeService.isConfirmModalOpen | async"></app-confirm-modal>
+  *ngIf="homeService.isConfirmModalOpen | async">
+</app-confirm-modal>

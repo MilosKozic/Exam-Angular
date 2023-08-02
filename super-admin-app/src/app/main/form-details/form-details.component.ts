@@ -9,16 +9,11 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormDetailsComponent {
-  itemData$: Observable<any>;
-  actionsData$: Observable<any>;
-  isItemDataLoading$: Observable<any>;
-  isActionsDataLoading$: Observable<any>;
+  formDetailsService$: FormDetailsResolverService;
 
-  constructor(private formDetailsService: FormDetailsResolverService) {
-    this.itemData$ = this.formDetailsService.itemData$;
-    this.actionsData$ = this.formDetailsService.actionsData$;
-    this.isActionsDataLoading$ = this.formDetailsService.isActionsDataLoading$
-    this.isItemDataLoading$ = this.formDetailsService.isItemDataLoading$
+
+  constructor(formDetailsService: FormDetailsResolverService) {
+    this.formDetailsService$ = formDetailsService
   }
 
 }

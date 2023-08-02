@@ -8,13 +8,25 @@ import { HomeService } from './home.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
-  homeService: any;
+  homeService: HomeService;
   constructor(homeService: HomeService) {
     this.homeService = homeService;
   }
 
+
+  // if i had real API i would add here filter, with debouncer
+  // it would be something like this method
+  // this is dummy example
+
+  // this.searchSubscription = this.searchSubject
+  // .pipe(
+  //   debounceTime(500),
+  //   distinctUntilChanged(),
+  //   switchMap((searchQuery) => this.searchService.search(searchQuery))
+  // )
+  // .subscribe((results) => (this.searchResults = results));
+
   onConfirm(event: any){
-    console.log(event);
     if(event) {      
       this.homeService.deleteData(event)    
      }

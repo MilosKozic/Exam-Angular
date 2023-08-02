@@ -15,6 +15,8 @@ export class HomeService {
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
+  selected$Items = new BehaviorSubject<number[]>([]);
+
   isConfirmModalOpen = new BehaviorSubject<boolean>(false);
   itemsForDelete = new BehaviorSubject<[]>([]);
   dataForDelete: any;
@@ -52,6 +54,7 @@ export class HomeService {
       dataFromServer = dataFromServer.filter(
         (item: any) => !this.dataForDelete?.includes(item.id)
       );
+      this.selected$Items.next([])
       this.itemsData.next([...dataFromServer]);
       this.toastr.success('successfully deleted');
       // i do not have API for delete

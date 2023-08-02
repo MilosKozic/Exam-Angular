@@ -1,21 +1,25 @@
+
+
+<h4>User data:</h4>
 <app-table 
-  [dataSource]="itemData$ | async" 
+  [dataSource]="formDetailsService$.itemData$ | async" 
   [actions]="false" 
   [select]="false"
-  [isLoading]="isItemDataLoading$ | async">
+  [isLoading]="formDetailsService$.isItemDataLoading$ | async">
     <th class="header-cell">id</th>
     <th class="header-cell">Name</th>
     <th class="header-cell">Email</th>
     <th class="header-cell">Phone</th>
     <th class="header-cell">Form name</th>
     <th class="header-cell">Form status</th>
-</app-table>
+  </app-table>
 
+<h4>Action data:</h4>
 <app-table 
-  [dataSource]="actionsData$ | async" 
+  [dataSource]="formDetailsService$.actionsData$ | async" 
   [actions]="false" 
   [select]="false"
-  [isLoading]="isActionsDataLoading$ | async">
+  [isLoading]="formDetailsService$.isActionsDataLoading$ | async">
     <th class="header-cell">id</th>
     <th class="header-cell">Action</th>
     <th class="header-cell">Action start time</th>

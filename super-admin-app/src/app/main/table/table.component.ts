@@ -1,6 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HomeService } from '../home/home.service';
 
 export interface TableItem {
   id: number;
@@ -24,17 +25,21 @@ export class TableComponent {
   @Output() viewAction = new EventEmitter<number>();
   @Output() deleteAction = new EventEmitter<number[]>();
   @Input() isLoading!: boolean | null;
-  selItems = new BehaviorSubject<number[]>([])
+  selected$Items:BehaviorSubject<number[]>
   selectedItems: number[] = [];
+
+  constructor(homeService: HomeService){
+   this.selected$Items = homeService.selected$Items
+  }
 
   toggleSelection(id: number) {
     const index = this.selectedItems.indexOf(id);
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
-      this.selItems.next([...this.selectedItems])
+      this.selected$Items.next([...this.selectedItems])
     } else {
       this.selectedItems.push(id);
-      this.selItems.next([...this.selectedItems])
+      this.selected$Items.next([...this.selectedItems])
     }    
   }
 
@@ -49,10 +54,10 @@ export class TableComponent {
   toggleAllSelection() {
     if (this.isAllSelected()) {
       this.selectedItems = [];
-      this.selItems.next([...this.selectedItems])
+      this.selected$Items.next([...this.selectedItems])
     } else {
       this.selectedItems = this.dataSource.map((item: any) => item.id);
-      this.selItems.next([...this.selectedItems])
+      this.selected$Items.next([...this.selectedItems])
     }
   }
 
@@ -65,7 +70,7 @@ export class TableComponent {
   }
 
   onDeleteMulti(data: number[]) {
-    this.deleteAction.emit(data)
+    this.deleteAction.emit(data)    
   }
 
   originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {

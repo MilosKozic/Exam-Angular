@@ -1,14 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable, finalize, map } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
+import { TableItem } from '../table/table.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormDetailsResolverService {
-  private itemData = new BehaviorSubject<any>([]);
+  private itemData = new BehaviorSubject<TableItem[]>([]);
   itemData$ = this.itemData.asObservable();
 
   private isItemDataLoading = new BehaviorSubject<boolean>(false);
