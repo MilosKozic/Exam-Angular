@@ -31,12 +31,17 @@
 }
 
 .action-cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 60px;
+    margin-left: 12px;
+    text-align: center;
     app-button {
         margin-right: 8px;
     }
+}
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .delete-multi-btn {

@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -17,8 +18,9 @@ export interface TableItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
-  @Input() dataSource: TableItem[] | any= [];
+  @Input() dataSource: any= [];
   @Input() actions!: boolean;
+  @Input() select!: boolean;
   @Output() viewAction = new EventEmitter<number>();
   @Output() deleteAction = new EventEmitter<number[]>();
   selItems = new BehaviorSubject<number[]>([])
@@ -63,6 +65,10 @@ export class TableComponent {
 
   onDeleteMulti(data: number[]) {
     this.deleteAction.emit(data)
+  }
+
+  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return 0;
   }
 
 }

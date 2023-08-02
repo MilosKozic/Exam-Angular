@@ -10,8 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class FormDetailsComponent {
   itemData$: Observable<any>;
+  actionsData$: Observable<any>;
+
   constructor(private formDetailsService: FormDetailsResolverService) {
-    this.itemData$ = this.formDetailsService.itemData$
+    this.itemData$ = this.formDetailsService.itemData$;
+    this.actionsData$ = this.formDetailsService.actionsData$;
   }
 
 }
