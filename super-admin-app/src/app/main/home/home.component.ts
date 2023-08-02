@@ -14,7 +14,8 @@ export class HomeComponent {
   }
 
 
-  // if i had real API i would add here filter, with debouncer
+  // if I had a defined api call, 
+  // I would add an option for search with a debouncer
   // it would be something like this method
   // this is dummy example
 
