@@ -23,6 +23,7 @@ export class TableComponent {
   @Input() select!: boolean;
   @Output() viewAction = new EventEmitter<number>();
   @Output() deleteAction = new EventEmitter<number[]>();
+  @Input() isLoading!: boolean | null;
   selItems = new BehaviorSubject<number[]>([])
   selectedItems: number[] = [];
 

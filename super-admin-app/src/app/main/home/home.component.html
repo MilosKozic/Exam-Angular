@@ -3,14 +3,15 @@
   [actions]="true"
   (deleteAction)="homeService.handleDeleteClick($event)"
   (viewAction)="homeService.handleViewClick($event)"
-  [select]="true">
+  [select]="true"
+  [isLoading]="homeService.isLoading$ | async">
   <th class="header-cell">id</th>
   <th class="header-cell">Name</th>
   <th class="header-cell">Email</th>
   <th class="header-cell">Phone</th>
   <th class="header-cell">Form name</th>
   <th class="header-cell">Form status</th></app-table>
-  <app-confirm-modal 
+<app-confirm-modal 
   (confirm)="onConfirm($event)" 
   [cancelLabel]="'No'"
   [confirmLabel]="'Yes'"

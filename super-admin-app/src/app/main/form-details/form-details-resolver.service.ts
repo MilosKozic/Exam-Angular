@@ -11,6 +11,12 @@ export class FormDetailsResolverService {
   private itemData = new BehaviorSubject<any>([]);
   itemData$ = this.itemData.asObservable();
 
+  private isItemDataLoading = new BehaviorSubject<boolean>(false);
+  isItemDataLoading$ = this.isItemDataLoading.asObservable();
+
+  private isActionsDataLoading = new BehaviorSubject<boolean>(false);
+  isActionsDataLoading$ = this.isActionsDataLoading.asObservable();
+
   private actionsData = new BehaviorSubject<any>([]);
   private formatActionsData: any = [];
   actionsData$ = this.actionsData.asObservable();
@@ -27,12 +33,16 @@ export class FormDetailsResolverService {
   }
 
   getOneItem(id: any) {
-    this.httpService.getSingle(id).subscribe((data) => {
+    this.isItemDataLoading.next(true);
+    this.httpService.getSingle(id)
+    .pipe(finalize(()=>this.isItemDataLoading.next(false)))
+    .subscribe((data) => {
       this.itemData.next([data]);
     });
   }
 
   getActions() {
+    this.isActionsDataLoading.next(true)
     this.httpService
       .getActions()
       .pipe(
@@ -56,6 +66,7 @@ export class FormDetailsResolverService {
       )
       .subscribe((data) => {
         this.actionsData.next(data);
+        this.isActionsDataLoading.next(false)
       });
   }
 

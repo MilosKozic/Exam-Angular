@@ -4,6 +4,8 @@
 </div>
 
 <table class="custom-table">
+  <app-spinner-loader *ngIf="isLoading"></app-spinner-loader>
+
   <!-- Table header -->
   <tr class="header-row">
     <th class="header-cell checkbox-cell" *ngIf="select">

@@ -13,10 +13,6 @@ export class HomeComponent {
     this.homeService = homeService;
   }
 
-  handleDeleteClick(event: number) {
-    console.log(event);
-  }
-
   onConfirm(event: any){
     console.log(event);
     if(event) {      

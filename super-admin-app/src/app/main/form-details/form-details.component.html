@@ -1,7 +1,8 @@
 <app-table 
   [dataSource]="itemData$ | async" 
   [actions]="false" 
-  [select]="false">
+  [select]="false"
+  [isLoading]="isItemDataLoading$ | async">
     <th class="header-cell">id</th>
     <th class="header-cell">Name</th>
     <th class="header-cell">Email</th>
@@ -13,7 +14,8 @@
 <app-table 
   [dataSource]="actionsData$ | async" 
   [actions]="false" 
-  [select]="false">
+  [select]="false"
+  [isLoading]="isActionsDataLoading$ | async">
     <th class="header-cell">id</th>
     <th class="header-cell">Action</th>
     <th class="header-cell">Action start time</th>

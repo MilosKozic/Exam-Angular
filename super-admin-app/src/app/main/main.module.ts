@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { CommonModule } from '@angular/common';
 import { ConfirmModule } from '../shared/confirm-modal/confirm-modal.module';
 import { FormDetailsComponent } from './form-details/form-details.component';
+import { SpinnerLoaderModule } from '../shared/spinner-loader/spinner-loader.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { FormDetailsComponent } from './form-details/form-details.component';
     TableComponent,
     FormDetailsComponent,
   ],
-  imports: [CommonModule, MainRoutingModule, ButtonModule, ConfirmModule],
+  imports: [
+    CommonModule,
+    MainRoutingModule,
+    ButtonModule,
+    ConfirmModule,
+    SpinnerLoaderModule,
+  ],
   exports: [],
 })
 export class MainModule {}

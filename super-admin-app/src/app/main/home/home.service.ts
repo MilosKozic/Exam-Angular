@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, finalize } from 'rxjs';
 import { TableItem } from '../table/table.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,10 @@ import { HttpService } from 'src/app/services/http.service';
 export class HomeService {
   private itemsData = new BehaviorSubject<TableItem[]>([]);
   itemsData$: TableItem[] | any = this.itemsData.asObservable();
+
+  private isLoading = new BehaviorSubject<boolean>(false);
+  isLoading$ = this.isLoading.asObservable();
+
   isConfirmModalOpen = new BehaviorSubject<boolean>(false);
   itemsForDelete = new BehaviorSubject<[]>([]);
   dataForDelete: any;
@@ -24,9 +28,13 @@ export class HomeService {
   }
 
   getItems(): void {
-    this.httpService.get().subscribe((data) => {
-      this.itemsData.next(data);
-    });
+    this.isLoading.next(true);
+    this.httpService
+      .get()
+      .pipe(finalize(() => this.isLoading.next(false)))
+      .subscribe((data) => {
+        this.itemsData.next(data);
+      });
   }
 
   handleViewClick(id: number) {
