@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable, finalize, map } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { TableItem } from '../table/table.component';
+// import {  FuncResolver } from ''
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class FormDetailsResolverService {
     this.getOneItem(id);
     this.getActions();
   }
+
 
   getOneItem(id: any) {
     this.isItemDataLoading.next(true);
@@ -89,4 +91,11 @@ export class FormDetailsResolverService {
       return 'Just now';
     }
   }
+}
+
+export const FormDetailsResolver: ResolveFn<any> =(
+  route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+)=>{
+   return inject(FormDetailsResolverService).resolve(route,state);
 }
